@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Row, Col, ListGroup, Image } from 'react-bootstrap'
 import products from '../products'
 import Rating from "../components/Rating"
-import { Card } from 'react-bootstrap'
+import { Card , Button} from 'react-bootstrap'
 function ProductScreen(match) {
     const { id } = useParams();
     const product = products.find((p)=>p._id === id);
@@ -31,7 +31,7 @@ function ProductScreen(match) {
                 </ListGroup>
             </Col>
             <Col md={3}>
-                <ListGroup>
+                <ListGroup virant="flush">
                     <ListGroup.Item>
                         <Row>
                             <Col> Price:</Col>
@@ -40,6 +40,20 @@ function ProductScreen(match) {
                             </Col>
                         </Row>
                     </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Row>
+                            <Col> Status:</Col>
+                            <Col>
+                               {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+                    <ListGroup.Item style={{ display: 'flex', justifyContent: 'center' }}>
+                            <div style={{ width: '100%', maxWidth: '200px' }}> {/* Adjust maxWidth as needed */}
+                                <Button className='btn-block w-100' type='button' disabled={product.countInStock === 0}>Add To Cart</Button>
+                            </div>
+                    </ListGroup.Item>
+
                 </ListGroup>
             </Col>
         </Row>
